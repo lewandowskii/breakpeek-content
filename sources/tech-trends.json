@@ -1,0 +1,72 @@
+{
+  "$schema": "../schemas/content-items.schema.json",
+  "schemaVersion": 1,
+  "sourceId": "tech-trends",
+  "items": [
+    {
+      "id": "9ad9c3ba-5589-4b07-bbf9-c200dbad8273",
+      "kind": "news",
+      "title": "Agentic 工作流",
+      "summary": "技术风向：AI 应用正在从单次生成扩展到可验证的多步工作流。",
+      "body": "多步工作流把查询改写、工具选择、执行、结果验证和失败恢复纳入编排。并非每个场景都需要自主 Agent；步骤稳定且输入输出明确时，固定工作流通常更便宜、更容易测试。",
+      "bodyFormat": "plain",
+      "publishedAt": "2026-09-01T00:00:00Z",
+      "tags": [
+        "Agent",
+        "工作流"
+      ]
+    },
+    {
+      "id": "d500b4fd-9ac3-406d-af13-b783d92b21b3",
+      "kind": "news",
+      "title": "本地优先 AI",
+      "summary": "技术风向：小模型与端侧推理让更多隐私敏感任务可以在本地完成。",
+      "body": "端侧方案可降低网络依赖和数据外传，但仍受内存、算力、功耗与模型更新约束。选型时应以具体设备上的延迟、质量和资源占用为依据，而不是只比较参数规模。",
+      "bodyFormat": "plain",
+      "publishedAt": "2026-09-01T00:00:00Z",
+      "tags": [
+        "端侧推理",
+        "隐私"
+      ]
+    },
+    {
+      "id": "746a02a6-9faa-4262-a808-cd84c9dfb970",
+      "kind": "news",
+      "title": "可观测性关联",
+      "summary": "技术风向：日志、指标与链路追踪正在通过统一上下文形成关联视图。",
+      "body": "单一信号很难解释复杂故障。通过请求 ID、Trace Context 和一致的资源属性关联日志、指标与追踪，可以缩短定位路径；但采样、基数和存储成本仍需要明确治理。",
+      "bodyFormat": "plain",
+      "publishedAt": "2026-09-01T00:00:00Z",
+      "tags": [
+        "可观测性",
+        "Tracing"
+      ]
+    },
+    {
+      "id": "47cbc11b-07a5-44e3-9476-b3c1e0e7ee85",
+      "kind": "news",
+      "title": "Passkey 登录",
+      "summary": "技术风向：Passkey 正在减少用户对可钓鱼共享密码的依赖。",
+      "body": "Passkey 基于公钥凭证，站点保存公钥而非共享秘密，并由设备或凭证提供方完成用户验证。落地时仍需设计跨设备使用、账户恢复、旧登录方式迁移和风险控制。",
+      "bodyFormat": "plain",
+      "publishedAt": "2026-09-01T00:00:00Z",
+      "tags": [
+        "认证",
+        "WebAuthn"
+      ]
+    },
+    {
+      "id": "f899dcfc-54f6-4c6c-bbca-879910969f30",
+      "kind": "news",
+      "title": "软件供应链安全",
+      "summary": "技术风向：依赖来源、构建过程与制品证明正在成为交付链的一部分。",
+      "body": "仅扫描最终代码不足以覆盖供应链风险。更完整的治理会固定依赖、限制发布权限、隔离构建环境、生成软件物料清单，并让制品能追溯到受审查的源码和构建过程。",
+      "bodyFormat": "plain",
+      "publishedAt": "2026-09-01T00:00:00Z",
+      "tags": [
+        "供应链",
+        "安全"
+      ]
+    }
+  ]
+}

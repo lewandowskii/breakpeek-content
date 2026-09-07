@@ -1,0 +1,70 @@
+{
+  "$schema": "../schemas/content-items.schema.json",
+  "schemaVersion": 1,
+  "sourceId": "interview-ai",
+  "items": [
+    {
+      "id": "f750025e-3176-4ea6-a506-fc5fb0e0240c",
+      "kind": "interview",
+      "title": "Temperature",
+      "summary": "AI 面试题：大模型里的 temperature 控制了什么？",
+      "body": "temperature 会缩放生成阶段的 logits，从而改变候选 token 的概率分布。较低值让分布更集中，输出通常更稳定；较高值增加多样性，也更可能偏离约束。它不会增加模型知识，也不是事实正确率开关。",
+      "bodyFormat": "plain",
+      "tags": [
+        "大模型",
+        "采样"
+      ]
+    },
+    {
+      "id": "71276000-5aff-4da5-bb95-4550af774430",
+      "kind": "interview",
+      "title": "RAG 基本流程",
+      "summary": "AI 面试题：一个基础 RAG 系统通常包含哪些步骤？",
+      "body": "基础流程包括文档解析与切分、向量化和索引、查询理解、候选召回、重排、上下文组装与生成。评估时应拆开观察检索命中、上下文利用和最终答案，而不是只用一个端到端主观分数判断系统。",
+      "bodyFormat": "plain",
+      "tags": [
+        "RAG",
+        "检索",
+        "评估"
+      ]
+    },
+    {
+      "id": "0e5a39f9-a957-440d-84c3-9c85bbc7ebc0",
+      "kind": "interview",
+      "title": "Embedding",
+      "summary": "AI 面试题：Embedding 是什么，相似度高就一定语义正确吗？",
+      "body": "Embedding 把输入映射为向量，使某种训练目标下相近的内容在向量空间中更接近。相似度只反映模型与度量定义下的接近程度，可能受领域、语言、文本长度和切分影响，不能替代业务相关性判断或事实验证。",
+      "bodyFormat": "plain",
+      "tags": [
+        "Embedding",
+        "向量检索"
+      ]
+    },
+    {
+      "id": "d801cf14-9eb5-4b20-9c9e-6e95ff04aabd",
+      "kind": "interview",
+      "title": "工具调用安全",
+      "summary": "AI 面试题：为什么模型生成了合法工具参数仍不能直接执行？",
+      "body": "Schema 合法只说明结构正确，不代表操作已授权或业务语义安全。执行层仍需做身份鉴别、权限、租户边界、资源存在性、幂等、速率限制和审计。对高风险操作还需要明确确认，工具结果也应继续视为不可信输入。",
+      "bodyFormat": "plain",
+      "tags": [
+        "Agent",
+        "工具调用",
+        "安全"
+      ]
+    },
+    {
+      "id": "520f8ba4-286b-446b-a6c8-296e7ddea11f",
+      "kind": "interview",
+      "title": "幻觉评估",
+      "summary": "AI 面试题：如何评估并降低大模型回答中的事实性幻觉？",
+      "body": "先定义可验证的事实性指标和覆盖业务风险的测试集，再区分检索失败、上下文冲突与生成偏差。降低风险可使用可靠检索、来源引用、结构化约束、工具核验和拒答策略；上线后还需要抽样审计与回归评估。",
+      "bodyFormat": "plain",
+      "tags": [
+        "评估",
+        "幻觉",
+        "可靠性"
+      ]
+    }
+  ]
+}

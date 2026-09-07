@@ -1,0 +1,62 @@
+{
+  "$schema": "../schemas/content-items.schema.json",
+  "schemaVersion": 1,
+  "sourceId": "light-jokes",
+  "items": [
+    {
+      "id": "f298132c-7108-4248-91f2-7a10885d83aa",
+      "kind": "joke",
+      "title": "注释三连",
+      "summary": "笑话：程序员最头疼的三件事——写注释、看注释、别人不写注释。",
+      "bodyFormat": "plain",
+      "tags": [
+        "程序员",
+        "注释"
+      ]
+    },
+    {
+      "id": "ddb536ed-2dc2-420f-bc14-3a7d907920f2",
+      "kind": "joke",
+      "title": "缓存解决了",
+      "summary": "同事问 Bug 怎么突然好了？程序员答：我清了缓存，也清空了思路。",
+      "bodyFormat": "plain",
+      "tags": [
+        "缓存",
+        "调试"
+      ]
+    },
+    {
+      "id": "3482c1f0-1750-4c15-a5af-5f1d164967cf",
+      "kind": "joke",
+      "title": "两件难事",
+      "summary": "计算机科学有两件难事：缓存失效、命名，以及数不准到底有几件。",
+      "bodyFormat": "plain",
+      "tags": [
+        "命名",
+        "缓存"
+      ]
+    },
+    {
+      "id": "d3c95888-9458-434f-a269-158c1d07a776",
+      "kind": "joke",
+      "title": "周五发布",
+      "summary": "周五下午的发布按钮没有变红，因为它知道真正该害怕的是人。",
+      "bodyFormat": "plain",
+      "tags": [
+        "发布",
+        "运维"
+      ]
+    },
+    {
+      "id": "de511845-b5e1-4434-a4e8-075b890315f2",
+      "kind": "joke",
+      "title": "在我这里能跑",
+      "summary": "“在我电脑上能跑”不是结论，而是容器化需求的开场白。",
+      "bodyFormat": "plain",
+      "tags": [
+        "环境",
+        "容器"
+      ]
+    }
+  ]
+}

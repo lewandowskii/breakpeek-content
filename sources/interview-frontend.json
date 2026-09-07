@@ -1,0 +1,72 @@
+{
+  "$schema": "../schemas/content-items.schema.json",
+  "schemaVersion": 1,
+  "sourceId": "interview-frontend",
+  "items": [
+    {
+      "id": "413e667e-f968-42ff-9d1d-9661539bc6ab",
+      "kind": "interview",
+      "title": "async/await 与事件循环",
+      "summary": "前端面试题：解释 async/await 在事件循环里的行为。",
+      "body": "async 函数调用后立即返回 Promise。执行到 await 时会先求值右侧表达式，随后暂停该 async 函数；await 之后的逻辑通过 Promise 反应作业继续，通常进入微任务队列。它不会阻塞线程，但会切分函数内部的执行顺序。",
+      "bodyFormat": "plain",
+      "tags": [
+        "JavaScript",
+        "事件循环",
+        "Promise"
+      ]
+    },
+    {
+      "id": "1ae6e06b-2da4-42e6-864a-6a9fc8569909",
+      "kind": "interview",
+      "title": "CORS 预检",
+      "summary": "前端面试题：跨域请求为什么会先发送 OPTIONS 预检？",
+      "body": "浏览器会在某些非简单跨域请求前，通过 OPTIONS 告知服务器实际请求的方法和额外请求头。只有响应中的 CORS 许可满足条件，浏览器才继续发送实际请求。预检不是身份认证，也不能替代服务器鉴权与 CSRF 防护。",
+      "bodyFormat": "plain",
+      "tags": [
+        "浏览器",
+        "CORS",
+        "安全"
+      ]
+    },
+    {
+      "id": "e5a97677-5de0-483b-8faa-1af50507ee6a",
+      "kind": "interview",
+      "title": "关键渲染路径",
+      "summary": "前端面试题：浏览器从 HTML 到首屏像素经历了哪些关键步骤？",
+      "body": "浏览器解析 HTML 和 CSS，构建 DOM 与 CSSOM，组合生成渲染树，随后执行布局、绘制与合成。JavaScript、字体、图片以及样式依赖都可能改变路径或造成阻塞。优化时应围绕真实指标减少关键资源、缩短依赖链，并避免不必要的布局抖动。",
+      "bodyFormat": "plain",
+      "tags": [
+        "浏览器",
+        "性能",
+        "渲染"
+      ]
+    },
+    {
+      "id": "03d01b54-e7ac-4f85-b5a9-cbecae4d0054",
+      "kind": "interview",
+      "title": "React 列表 key",
+      "summary": "前端面试题：为什么 React 列表需要稳定的 key，而不推荐随意使用下标？",
+      "body": "key 帮助 React 在同级子节点之间识别元素身份，以便复用已有 Fiber 和状态。插入、删除或重排时，下标会随位置改变，可能导致状态被错误复用。只有列表静态、不会重排且条目没有独立状态时，下标风险才相对较低。",
+      "bodyFormat": "plain",
+      "tags": [
+        "React",
+        "协调",
+        "状态"
+      ]
+    },
+    {
+      "id": "ec264f52-6ff1-41ed-a1fc-152341847519",
+      "kind": "interview",
+      "title": "重排与重绘",
+      "summary": "前端面试题：重排、重绘和合成有什么区别？",
+      "body": "重排会重新计算几何位置和尺寸，通常还会引发后续绘制；重绘只更新像素外观，不一定改变布局；合成是在已有图层结果上进行组合。不同浏览器和场景的优化策略会变化，因此不要仅靠属性名单判断成本，应结合性能面板测量。",
+      "bodyFormat": "plain",
+      "tags": [
+        "浏览器",
+        "性能",
+        "CSS"
+      ]
+    }
+  ]
+}

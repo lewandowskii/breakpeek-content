@@ -1,0 +1,16 @@
+{
+  "name": "breakpeek-content",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "scripts": {
+    "content:add": "node scripts/add-content.mjs",
+    "validate": "node scripts/validate.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "npm run validate && npm run build"
+  },
+  "license": "CC-BY-4.0"
+}
