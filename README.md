@@ -58,6 +58,14 @@ npm run keys:generate -- staging-2026
 ```
 
 密钥写入被 Git 忽略的 `.secrets/`。私钥只复制到 GitHub Secret，公钥配置给 Breakpeek Host。
+GitHub 中建议将 `CONTENT_SIGNING_PRIVATE_KEY` 设置为私钥文件的单行 Base64，
+避免多行粘贴被浏览器或密码管理器改写：
+
+```bash
+base64 < .secrets/staging-2026-private.pem | tr -d '\n' | pbcopy
+```
+
+构建脚本也兼容完整 PEM 文本、含字面量 `\\n` 的 PEM，以及本地开发时的文件路径。
 
 ## 编辑约束
 

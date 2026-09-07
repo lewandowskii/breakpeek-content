@@ -39,9 +39,18 @@ const payload = {
 }
 let signature = null
 if (privateKeyReference) {
-  const privateKeyInput = privateKeyReference.includes('BEGIN PRIVATE KEY')
-    ? privateKeyReference
-    : await readFile(privateKeyReference, 'utf8')
+  const trimmed = privateKeyReference.trim()
+  const normalized = trimmed.includes('\\n') && !trimmed.includes('\n')
+    ? trimmed.replaceAll('\\n', '\n')
+    : trimmed
+  const decoded = Buffer.from(normalized.replace(/^base64:/, ''), 'base64').toString('utf8')
+  const privateKeyInput = normalized.includes('BEGIN PRIVATE KEY')
+    ? normalized
+    : decoded.includes('BEGIN PRIVATE KEY')
+      ? decoded
+      : process.env.GITHUB_ACTIONS === 'true'
+        ? (() => { throw new Error('CONTENT_SIGNING_PRIVATE_KEY must contain PKCS#8 PEM text or its single-line Base64 encoding') })()
+        : await readFile(normalized, 'utf8')
   signature = sign(null, Buffer.from(canonicalJson(payload)), createPrivateKey(privateKeyInput)).toString('base64')
 }
 const manifest = { ...payload, signature }
