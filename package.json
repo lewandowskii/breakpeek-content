@@ -8,6 +8,7 @@
   },
   "scripts": {
     "content:add": "node scripts/add-content.mjs",
+    "keys:generate": "node scripts/generate-signing-key.mjs",
     "validate": "node scripts/validate.mjs",
     "build": "node scripts/build.mjs",
     "check": "npm run validate && npm run build"

@@ -1,0 +1,54 @@
+name: Publish staging content
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.19.0
+      - name: Validate and build signed content
+        run: npm run check
+        env:
+          CONTENT_SIGNING_PRIVATE_KEY: ${{ secrets.CONTENT_SIGNING_PRIVATE_KEY }}
+          CONTENT_SIGNING_KEY_ID: ${{ vars.CONTENT_SIGNING_KEY_ID }}
+      - name: Require publishing configuration and signature
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
+          CONTENT_SIGNING_PRIVATE_KEY: ${{ secrets.CONTENT_SIGNING_PRIVATE_KEY }}
+          CONTENT_SIGNING_KEY_ID: ${{ vars.CONTENT_SIGNING_KEY_ID }}
+        run: |
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$R2_BUCKET_NAME"
+          test -n "$CONTENT_SIGNING_PRIVATE_KEY"
+          test -n "$CONTENT_SIGNING_KEY_ID"
+      - name: Upload immutable revision, then stable manifest
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
+        run: |
+          revision="$(find generated -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sort | tail -n 1)"
+          endpoint="https://${CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com"
+          aws s3 sync "generated/${revision}/sources" "s3://${R2_BUCKET_NAME}/staging/${revision}/sources" \
+            --endpoint-url "$endpoint" \
+            --cache-control 'public,max-age=31536000,immutable'
+          aws s3 cp "generated/${revision}/manifest.json" "s3://${R2_BUCKET_NAME}/staging/${revision}.manifest.json" \
+            --endpoint-url "$endpoint" \
+            --cache-control 'public,max-age=31536000,immutable' \
+            --content-type 'application/json; charset=utf-8'
+          aws s3 cp "generated/${revision}/manifest.json" "s3://${R2_BUCKET_NAME}/staging/manifest.json" \
+            --endpoint-url "$endpoint" \
+            --cache-control 'no-cache' \
+            --content-type 'application/json; charset=utf-8'

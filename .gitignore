@@ -1,5 +1,6 @@
 .DS_Store
 *.pem
 *.key
+.secrets/
 generated/*
 !generated/.gitkeep

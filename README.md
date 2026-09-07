@@ -51,6 +51,14 @@ generated/<revision>/
 构建脚本会使用 Ed25519 对清单负载签名。`CONTENT_SIGNING_KEY_ID` 用于标识公钥。
 未设置私钥时生成开发清单，`signature` 为 `null`，不得发布到生产环境。
 
+首次配置 staging 时可生成一对本地 Ed25519 密钥：
+
+```bash
+npm run keys:generate -- staging-2026
+```
+
+密钥写入被 Git 忽略的 `.secrets/`。私钥只复制到 GitHub Secret，公钥配置给 Breakpeek Host。
+
 ## 编辑约束
 
 1. 使用 `npm run content:add` 自动生成 UUID；不修改已有条目的 `id`。
@@ -61,5 +69,25 @@ generated/<revision>/
 
 ## 发布边界
 
-当前初始化版本只完成内容、校验、构建和 CI 产物归档。R2 上传、生产签名密钥
-和 Breakpeek Host 同步将在后续阶段接入。
+当前仓库已包含内容、校验、构建、CI 产物归档和手动 R2 staging 发布流程。
+生产发布策略与凭证由后续阶段配置。
+
+## 发布到 R2 staging
+
+`Publish staging content` 工作流按“不可变内容优先、稳定 Manifest 最后”的顺序发布：
+
+```text
+staging/<revision>/sources/*.ndjson
+staging/<revision>.manifest.json
+staging/manifest.json
+```
+
+稳定清单和归档清单位于同一目录，因此其中的
+`<revision>/sources/*.ndjson` 相对路径在两种入口下都保持有效。
+
+在 GitHub `staging` Environment 中配置：
+
+- Secrets：`CLOUDFLARE_ACCOUNT_ID`、`R2_ACCESS_KEY_ID`、`R2_SECRET_ACCESS_KEY`、`CONTENT_SIGNING_PRIVATE_KEY`
+- Variables：`R2_BUCKET_NAME`、`CONTENT_SIGNING_KEY_ID`
+
+随后从 Actions 手动运行 `Publish staging content`。Breakpeek Host 的目录地址应填写公开读取地址下的 `/staging/manifest.json`。
